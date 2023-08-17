@@ -1,0 +1,80 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Agricultores
+{% endblock titulo %}
+
+{% block cabecera %}
+    Agricultores
+{% endblock cabecera %}
+
+{% block contenido %}
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'aplicacion/assets/img/agricultura.jpg' %}" alt="..." />
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-lower">Agricultura sostenible</span>
+                </h2>
+                <p class="mb-3">Una de las mejores formas de mitigar el cambio climático, es crear sistemas alimentarios sostenibles basados en la agricultura sostenible. La agricultura sostenible proporciona una solución potencial para permitir que los sitemas agrícolas alimenten a una población en crecimiento dentro de las cambiantes condiciones ambientales.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<table>
+    <tr>
+        <td width="200"><h2>Agricultores</h2></td>
+        <td>
+            <a
+            href="{% url 'create_agricultor' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="New Record"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>CUIT</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for agricultor in agricultor_list %}
+    <tr>
+        <td>{{ agricultor.id }}</td>
+        <td>{{ agricultor.nombre}}</td>
+        <td>{{ agricultor.cuit}}</td>
+        <td>{{ agricultor.email}}</td>
+        <td>
+            <a
+             href="{% url 'detail_agricultor' agricultor.id %}"
+             class="btn btn-info"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-search fa-sm" tittle="View Record"></i>
+            </a>
+            <a
+             href="{% url 'update_agricultor' agricultor.id %}"
+             class="btn btn-primary"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-edit fa-sm" tittle="Edit Record"></i>
+            </a>
+            <a
+             href="{% url 'delete_agricultor' agricultor.id %}"
+             class="btn btn-danger"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-trash fa-sm" tittle="Delete Record"></i>
+           </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}

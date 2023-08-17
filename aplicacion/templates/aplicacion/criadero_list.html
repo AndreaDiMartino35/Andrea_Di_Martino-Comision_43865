@@ -1,0 +1,80 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Criaderos
+{% endblock titulo %}
+
+{% block cabecera %}
+Criaderos
+{% endblock cabecera %}
+
+{% block contenido %}
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'aplicacion/assets/img/criadero.jpg' %}" alt="..." />
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-lower">Criaderos que velan por el bienestar animal</span>
+                </h2>
+                <p class="mb-3">Los criaderos sustentables nacen desde una perspectiva social. Cada productor tiene que cumplir con criterios de sostenibilidad, donde los cerdos pueden manifestarse naturalmente, desarrollando habilidades maternas y así aumentar el número de lechones. Para lograrlo, nuestros productores han ambientado sus campos con sombra, agua limpia, raciones balanceadas de alimentos y manejo responsable de desechos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<table>
+    <tr>
+        <td width="200"><h2>Criaderos</h2></td>
+        <td>
+            <a
+            href="{% url 'create_criaderos' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="New Record"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>CUIT</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for criadero in criadero_list %}
+    <tr>
+        <td>{{ criadero.id }}</td>
+        <td>{{ criadero.nombre }}</td>
+        <td>{{ criadero.cuit }}</td>
+        <td>{{ criadero.email }}</td>
+        <td>
+            <a
+             href="{% url 'detail_criadero' criadero.id %}"
+             class="btn btn-info"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-search fa-sm" tittle="View Record"></i>
+            </a>
+            <a
+             href="{% url 'update_criadero' criadero.id %}"
+             class="btn btn-primary"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-edit fa-sm" tittle="Edit Record"></i>
+            </a>
+            <a
+             href="{% url 'delete_criadero' criadero.id %}"
+             class="btn btn-danger"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-trash fa-sm" tittle="Delete Record"></i>
+           </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}

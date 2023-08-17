@@ -1,0 +1,80 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Tambos
+{% endblock titulo %}
+
+{% block cabecera %}
+    Tambos
+{% endblock cabecera %}
+
+{% block contenido %}
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'aplicacion/assets/img/tambo.jpg' %}" alt="..." />
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-lower">Tambos más sustentables</span>
+                </h2>
+                <p class="mb-3">Estos productores siempre están buscando rentabilidad, sustentabilidad, eficiencia técnica, claridad en las reglas de juego, mientras que el consumidor se preocupa cada vez más por la salud, la seguridad del bienestar animal, el impacto en el ambiente, el orgen de los alimentos y de eso depende su confianza. Esa es la ecuación del negocio lechero actualmente.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<table>
+    <tr>
+        <td width="200"><h2>Tambos</h2></td>
+        <td>
+            <a
+            href="{% url 'create_tambo' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="New Record"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>CUIT</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for tambo in tambo_list %}
+    <tr>
+        <td>{{ tambo.id }}</td>
+        <td>{{ tambo.nombre}}</td>
+        <td>{{ tambo.cuit}}</td>
+        <td>{{ tambo.email}}</td>
+        <td>
+            <a
+             href="{% url 'detail_tambo' tambo.id %}"
+             class="btn btn-info"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-search fa-sm" tittle="View Record"></i>
+            </a>
+            <a
+             href="{% url 'update_tambo' tambo.id %}"
+             class="btn btn-primary"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-edit fa-sm" tittle="Edit Record"></i>
+            </a>
+            <a
+             href="{% url 'delete_tambo' tambo.id %}"
+             class="btn btn-danger"
+             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+             ><i class="fa fa-trash fa-sm" tittle="Delete Record"></i>
+           </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}

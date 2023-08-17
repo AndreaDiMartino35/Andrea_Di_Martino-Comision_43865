@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'aplicacion/css/styles.css' %}" rel="stylesheet" />
+    </head>
+        <title>
+            {% block titulo %}
+                Inicio
+            {% endblock titulo %}
+        </title>            
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="mainNav">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+
+                        {% if user.is_authenticated %}
+                        <a class="navbar-brand" href="{% url 'clientes' %}">Clientes</a>
+                        <a class="navbar-brand" href="{% url 'criaderos' %}">Criaderos</a>
+                        <a class="navbar-brand" href="{% url 'tambos' %}">Tambos</a>
+                        <a class="navbar-brand" href="{% url 'agricultores' %}">Agricultores</a>
+                        <p style="color:blue">Hola {{ user.username|upper }}</p>
+                        <div class="text-center">
+                            <img src="{{ request.session.foto }}" height="40px" weight="40px">
+                        </div>
+                        <div>
+                        <a class="btn btn-primary" href="{% url 'logout' %}">Cerrar sesión</a>
+                        
+                        <a class="btn btn-primary" href="{% url 'admin:index' %}">Administración</a>
+                        <a class="navbar-brand" href="{% url 'acerca' %}">Acerca de mi</a>
+                        {% else %}
+                        <a class="btn btn-info" href="{% url 'register' %}">Registrarse</a>
+                        <a class="btn btn-info" href="{% url 'login' %}">Login</a>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">
+                                {% block cabecera %}
+                                Bienvenidos al portal de emprendedores! <br> Los mejores productos en tu casa
+                                {% endblock cabecera %}
+                            </h1>
+                            <!-- Signup form-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- * * SB Forms Contact Form * *-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- This form is pre-integrated with SB Forms.-->
+                            <!-- To make this form functional, sign up at-->
+                            <!-- https://startbootstrap.com/solution/contact-forms-->
+                            <!-- to get an API token!-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        {% if mensaje %}
+        <h4>
+            <p style="color:blue" align="center">
+            {{ mensaje }}
+            </p>
+        </h4>
+        {% endif %}
+
+        {% block contenido %}
+
+        <section class="page-section clearfix">
+            <div class="container">
+                <div class="intro">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'aplicacion/assets/img/intro.jpg' %}" alt="..." />
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Productos Frescos</span>
+                            <br>
+                            <span class="section-heading-lower">De los productores directo a su mesa</span>
+                        </h2>
+                        <p class="mb-3"> La compra directa del productor es más fácil de lo que imaginas y es que los agricultores no se han quedado atrás con la digitalización de sus mercados. Una de las principales ventajas de la compra directa a productores locales de forma online es que no vas a tener la necesidad de trasladarte y tendrás productos frescos directos de sus productores.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Nuestra promesa</span>
+                            </h2>
+                            <p class="mb-0">Creemos que es posible unir y concentrar a productores responsables con consumidores conscientes. Cada productor tiene que cumplir con criterios de sostenibilidad en el que se destacan la reducción, reciclaje y reutilización de materiales. Se privilegian los procesos sustentables, los insumos y procesos de menos huella de carbono e híbrida.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0 small">Derechos de autor &copy; Andrea Di Martino - 2023</p></div>
+        
+        {% endblock contenido %}
+        
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'aplicacion/js/scripts.js' %}"></script>
+    </body>
+</html>
+

@@ -1,0 +1,35 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Resultados de búsqueda
+{% endblock titulo %}
+
+{% block cabecera %}
+    Resultados de búsqueda
+{% endblock cabecera %}
+
+{% block contenido %}
+    <h2>Los datos registrados bajo el siguiente email [ {{ email }} ], son:</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nombre}}</td>
+            <td>{{ cliente.apellido}}</td>
+            <td>{{ cliente.email}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}

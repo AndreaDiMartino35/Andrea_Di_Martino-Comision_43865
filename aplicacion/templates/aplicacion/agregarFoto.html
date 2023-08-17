@@ -1,0 +1,20 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Cargar Imagen
+{% endblock titulo %}
+
+{% block cabecera %}
+    Cargar Imagen
+{% endblock cabecera %}
+
+{% block contenido %}
+    <br>
+    <h3>Cargar Imagen</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Cargar">
+    </form>
+{% endblock contenido%}
